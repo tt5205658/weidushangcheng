@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:elevation="10dp"
+    android:paddingBottom="@dimen/dp_10"
+    >
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="@dimen/dp_312"
+        android:layout_height="@dimen/dp_118"
+        android:layout_margin="@dimen/dp_5"
+        android:background="@drawable/item_fragment_home_bg"
+        android:elevation="10dp"
+        android:translationZ="5dp">
+
+        <ImageView
+            android:id="@+id/item_fragment_home_fashion_image"
+            android:layout_width="@dimen/dp_85"
+            android:layout_height="@dimen/dp_98"
+            android:layout_margin="@dimen/dp_10"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_fragment_home_fashion_titlt"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:text="1111111111111111111111111111111111111111111111111111111111"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintLeft_toRightOf="@id/item_fragment_home_fashion_image"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_fragment_home_fashion_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:textColor="#ff0000"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@id/item_fragment_home_fashion_image"
+            app:layout_constraintLeft_toRightOf="@id/item_fragment_home_fashion_image" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

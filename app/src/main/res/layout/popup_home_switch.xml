@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#00000000"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_43"
+            android:background="@mipmap/bg_one"
+            android:id="@+id/popup_home_switch_onerecycle"></android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_92"
+            android:background="#885d5d5d"
+            android:id="@+id/popup_home_switch_tworecycle"></android.support.v7.widget.RecyclerView>
+    </LinearLayout>
