@@ -2,12 +2,18 @@ package com.example.bw.activity;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.bw.R;
 import com.example.bw.adapter.HomeViewPageAdapter;
 import com.example.bw.base.baseactivity.BaseActivity;
+import com.example.bw.bean.orderform.SkipHome;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +33,7 @@ public class HomeViewpageActivity extends BaseActivity {
     RadioButton activityHomeBottomRadiobuttonMy;
     @BindView(R.id.activity_home_radiogroup)
     RadioGroup activityHomeRadiogroup;
+    private HomeViewPageAdapter viewPageAdapter;
 
     @Override
     protected int setViewID() {
@@ -36,7 +43,8 @@ public class HomeViewpageActivity extends BaseActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         ButterKnife.bind(this);
-        HomeViewPageAdapter viewPageAdapter = new HomeViewPageAdapter(getSupportFragmentManager());
+        EventBus.getDefault().register(this);
+        viewPageAdapter = new HomeViewPageAdapter(getSupportFragmentManager());
         activityHomeViewpage.setAdapter(viewPageAdapter);
         activityHomeViewpage.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -98,16 +106,15 @@ public class HomeViewpageActivity extends BaseActivity {
             }
         });
     }
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    public void skip(SkipHome skipHome){
+        activityHomeViewpage.setCurrentItem(3);
+    }
 
     @Override
     protected void initData() {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
 
-    }
 }

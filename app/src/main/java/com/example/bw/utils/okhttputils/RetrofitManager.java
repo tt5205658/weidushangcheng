@@ -7,19 +7,24 @@ import android.text.TextUtils;
 
 import com.example.bw.App;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import rx.Observer;
@@ -136,6 +141,34 @@ public RetrofitManager delete(String url,HttpListener listener1){
 
     }
 
+    public void imagePost( String path, HttpListener listener1){
+        File file = new File(path);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+            baseApi.imagePost(part)
+                    .enqueue(new Callback() {
+                        @Override
+                        public void onResponse(Call call, retrofit2.Response response) {
+                            String s = response.body().toString();
+                        }
+
+                        @Override
+                        public void onFailure(Call call, Throwable t) {
+                            String message = t.getMessage();
+                        }
+                    });
+    }
+
+    public void put(String url, Map<String, String> map,HttpListener listener1) {
+        if (map == null) {
+            map = new HashMap<>();
+        }
+        baseApi.put(url, map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getObserver(listener1));
+
+    }
     private Observer getObserver(HttpListener listener1){
         Observer observer = new Observer<ResponseBody>() {
             @Override

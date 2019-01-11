@@ -1,6 +1,7 @@
 package com.example.bw.adapter.fragmenthome;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.bw.R;
 import com.example.bw.bean.home.HomeShoppingBean;
+import com.example.bw.fragment.home.CommodityDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,12 @@ import butterknife.ButterKnife;
             viewHodel.itemFragmentHomeFashionPrice.setText("$" + mlssBeanList.get(i).getPrice());
             viewHodel.itemFragmentHomeFashionTitlt.setText(mlssBeanList.get(i).getCommodityName());
             Glide.with(mContext).load(mlssBeanList.get(i).getMasterPic()).into(viewHodel.itemFragmentHomeFashionImage);
+            viewHodel.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mContext.startActivity(new Intent(mContext,CommodityDetails.class).putExtra("CommodityId",mlssBeanList.get(i).getCommodityId()+""));
+                }
+            });
         }
 
         @Override

@@ -16,6 +16,6 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_92"
-            android:background="#885d5d5d"
+            android:background="#335d5d5d"
             android:id="@+id/popup_home_switch_tworecycle"></android.support.v7.widget.RecyclerView>
     </LinearLayout>

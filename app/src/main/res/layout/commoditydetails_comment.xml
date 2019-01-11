@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_500"
+    android:background="#ff0000">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_500"
+            android:id="@+id/commoditydetails_comment_xrecycle"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

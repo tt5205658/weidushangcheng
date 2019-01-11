@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.constraint.ConstraintLayout
+    android:layout_width="@dimen/dp_0"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginTop="@dimen/dp_40"
+    android:layout_marginRight="@dimen/dp_24"
+    android:id="@+id/c1"
+    android:layout_marginLeft="@dimen/dp_24"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_16"
+        android:textColor="#666666"
+        android:text="我的收货地址"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="完成"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_12"
+            android:id="@+id/enter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        android:id="@+id/myaddress_recycle"
+        app:layout_constraintTop_toBottomOf="@id/c1"
+        app:layout_constraintBottom_toTopOf="@id/myaddress_addbutton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_24"
+        android:layout_marginRight="@dimen/dp_24"
+       >
+
+    </android.support.v7.widget.RecyclerView>
+    <Button
+        android:layout_width="@dimen/dp_116"
+        android:layout_height="@dimen/dp_30"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/dp_30"
+        android:text="新增收货地址"
+        android:id="@+id/myaddress_addbutton"
+        android:textSize="@dimen/sp_12"
+        android:textColor="#ffffff"
+        android:background="@drawable/myaddress_addbutton"
+        />
+</android.support.constraint.ConstraintLayout>

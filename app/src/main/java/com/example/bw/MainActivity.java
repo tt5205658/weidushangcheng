@@ -1,12 +1,16 @@
 package com.example.bw;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -68,6 +72,10 @@ private boolean isHide = false;
         ButterKnife.bind(this);
         iPresenter = new IPresenterImpl(this);
         initSharedPreferences();
+       DisplayMetrics dm =new DisplayMetrics();
+        WindowManager manager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        manager.getDefaultDisplay().getMetrics(dm);
+
 
     }
 
@@ -183,7 +191,7 @@ private boolean isHide = false;
     @Override
     public void getDataSuccess(Object data) {
         if (data instanceof UserLoginBean) {
-            UserLoginBean data1 = (UserLoginBean) data;
+           UserLoginBean data1 = (UserLoginBean) data;
             if (data1.getMessage().equals("登录成功")) {
                 initUserIdSharedPreferences(data1.getResult().getUserId()+"",data1.getResult().getSessionId()+"");
                 isRememberPwd();
@@ -225,7 +233,7 @@ private boolean isHide = false;
 
     @Override
     public void getDataFail(String error) {
-
+        Toast.makeText(this,"error"+error,Toast.LENGTH_SHORT).show();
     }
 
     @Override
