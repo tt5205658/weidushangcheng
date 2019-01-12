@@ -9,6 +9,7 @@ import android.widget.RadioGroup;
 import com.example.bw.R;
 import com.example.bw.adapter.HomeViewPageAdapter;
 import com.example.bw.base.baseactivity.BaseActivity;
+import com.example.bw.bean.orderform.SkipFromOrderFrom;
 import com.example.bw.bean.orderform.SkipHome;
 
 import org.greenrobot.eventbus.EventBus;
@@ -109,6 +110,16 @@ public class HomeViewpageActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void skip(SkipHome skipHome){
         activityHomeViewpage.setCurrentItem(3);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void skipFromOrder(SkipFromOrderFrom skip){
+        if(skip.getType()==1){
+            //首页
+   //         activityHomeViewpage.setCurrentItem(0);
+        }else if(skip.getType()==2){
+            //订单
+            activityHomeViewpage.setCurrentItem(3);
+        }
     }
 
     @Override

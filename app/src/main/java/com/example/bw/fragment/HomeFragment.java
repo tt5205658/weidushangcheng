@@ -83,6 +83,8 @@ private boolean tag;
 initimageViewSwitche();
     }
 
+
+
     @OnClick(R.id.fragment_home_head_textview_search)
     public void searchClick(){
     String s = editTextSerch.getText().toString();

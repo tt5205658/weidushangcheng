@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#0ff">
+   >
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="@dimen/dp_312"
@@ -51,7 +53,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_12"
             android:textColor="#666666"
-            android:text="代付款"
+            android:text="待付款"
             app:layout_constraintLeft_toLeftOf="@id/ordefrom_obligation"
             app:layout_constraintRight_toRightOf="@id/ordefrom_obligation"
             app:layout_constraintTop_toBottomOf="@id/ordefrom_obligation"
@@ -65,29 +67,30 @@
             app:layout_constraintRight_toLeftOf="@id/ordefrom_appraise"
             android:id="@+id/ordefrom_collect"
             android:layout_marginTop="@dimen/dp_20"
-            android:src="@drawable/daifuk_ddf"
+            android:src="@drawable/daishouh_ddf"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_12"
             android:textColor="#666666"
-            android:text="代付款"
+            android:text="待收货"
             app:layout_constraintLeft_toLeftOf="@id/ordefrom_collect"
             app:layout_constraintRight_toRightOf="@id/ordefrom_collect"
             app:layout_constraintTop_toBottomOf="@id/ordefrom_collect"
             android:layout_marginTop="@dimen/dp_10"
             />
+
         <ImageButton
+            android:id="@+id/ordefrom_appraise"
             android:layout_width="@dimen/dp_40"
             android:layout_height="@dimen/dp_40"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/ordefrom_collect"
-            android:id="@+id/ordefrom_appraise"
-            app:layout_constraintRight_toLeftOf="@id/ordefrom_complete"
+            android:src="@drawable/daipingj_ddf"
             android:layout_marginTop="@dimen/dp_20"
-            android:src="@drawable/daifuk_ddf"
-            />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/ordefrom_complete"
+            app:layout_constraintLeft_toRightOf="@id/ordefrom_collect"
+            tools:layout_editor_absoluteY="21dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

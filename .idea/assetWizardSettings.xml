@@ -49,7 +49,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/D:/work/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/hardware/ic_keyboard_arrow_down_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/D:/work/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/toggle/ic_check_box_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -59,7 +59,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="dow_address" />
+                                      <entry key="outputName" value="success_icon" />
                                     </map>
                                   </option>
                                 </PersistentState>

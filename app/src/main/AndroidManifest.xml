@@ -24,11 +24,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.UserRegisterActivity" />
-        <activity android:name=".activity.HomeViewpageActivity" android:launchMode="singleInstance"/>
+        <activity android:name=".activity.HomeViewpageActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.my.MyParticularsActivity" android:launchMode="standard"/>
         <activity android:name=".activity.my.MyAddressActivity"/>
         <activity android:name=".fragment.home.CommodityDetails"/>
         <activity android:name=".activity.shopping.ShoppingAddressActivity"/>
+        <activity android:name=".activity.orderform.OrderFormListActivity"/>
+        <activity android:name=".activity.orderform.PaymentOrderFromActivity"/>
+        <activity android:name=".activity.orderform.PaymentSuccessActivity" android:launchMode="singleTop"/>
     </application>
 
 </manifest>
