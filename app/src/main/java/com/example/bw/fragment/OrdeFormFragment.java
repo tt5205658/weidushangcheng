@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class OrdeFormFragment extends BaseFragment implements IView {
+public class OrdeFormFragment extends BaseFragment  {
     @BindView(R.id.ordefrom_all)
     ImageButton ordefromAll;
     @BindView(R.id.ordefrom_obligation)
@@ -54,6 +54,11 @@ public class OrdeFormFragment extends BaseFragment implements IView {
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+    }
 
     @Override
     public void onDestroyView() {
@@ -85,13 +90,5 @@ public class OrdeFormFragment extends BaseFragment implements IView {
         }
     }
 
-    @Override
-    public void getDataSuccess(Object data) {
 
-    }
-
-    @Override
-    public void getDataFail(String error) {
-
-    }
 }

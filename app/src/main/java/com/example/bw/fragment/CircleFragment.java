@@ -109,4 +109,10 @@ public class CircleFragment extends BaseFragment implements IView {
             String error1 = error;
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        iPresenter.onDetach();
+    }
 }

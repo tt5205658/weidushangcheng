@@ -120,6 +120,11 @@ public class CommodityDetails extends BaseActivity implements IView {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        iPresenter.onDetach();
+    }
 
     @OnClick({R.id.back, R.id.commoditydetails_head_shopping, R.id.commoditydetails_head_data, R.id.commoditydetails_head_pinglun, R.id.commoditydetails_buttom_add, R.id.commoditydetails_buttom_buy})
     public void onViewClicked(View view) {

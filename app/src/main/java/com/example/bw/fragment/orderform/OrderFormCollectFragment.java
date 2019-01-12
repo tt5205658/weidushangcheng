@@ -77,6 +77,12 @@ public class OrderFormCollectFragment extends BaseFragment implements IView {
     }*/
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        iPresenter.onDetach();
+    }
+
+    @Override
     protected void initData() {
 
     }

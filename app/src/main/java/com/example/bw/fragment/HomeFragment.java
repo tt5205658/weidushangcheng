@@ -168,6 +168,7 @@ initimageViewSwitche();
     public void onDestroy() {
         super.onDestroy();
         bind.unbind();
+        iPresenter.onDetach();
     }
 
     @Override

@@ -265,4 +265,10 @@ public class ShoppingFragment extends BaseFragment implements IView {
     public void getDataFail(String error) {
 
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        iPresenter.onDetach();
+    }
 }

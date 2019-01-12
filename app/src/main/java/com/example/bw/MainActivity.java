@@ -217,6 +217,7 @@ private boolean isHide = false;
         super.onDestroy();
         edit.putBoolean("remember_callback_phone",false);
         edit.commit();
+        iPresenter.onDetach();
     }
 
     //执行判断是否记住密码

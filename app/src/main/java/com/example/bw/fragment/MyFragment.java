@@ -109,6 +109,12 @@ public class MyFragment extends BaseFragment implements IView {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        iPresenter.onDetach();
+    }
+
+    @Override
     public void getDataFail(String error) {
 
     }

@@ -104,4 +104,10 @@ public class FragmentHomeShopping extends Fragment implements IView {
         }
 
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        iPresenter.onDetach();
+    }
 }

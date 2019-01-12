@@ -193,7 +193,11 @@ public class FragmentHomeHomepage extends BaseFragment implements IView {
 
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        iPresenter.onDetach();
+    }
 
     @OnClick({R.id.rxtjimage, R.id.mlssimage, R.id.pzssimage})
     public void onViewClicked(View view) {

@@ -39,6 +39,12 @@ public class CommodityDetailsComment extends BaseFragment {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    @Override
     protected void initView() {
 
     }

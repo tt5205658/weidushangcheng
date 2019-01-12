@@ -110,6 +110,7 @@ public class HomeViewpageActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void skip(SkipHome skipHome){
         activityHomeViewpage.setCurrentItem(3);
+        EventBus.getDefault().removeAllStickyEvents();
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void skipFromOrder(SkipFromOrderFrom skip){

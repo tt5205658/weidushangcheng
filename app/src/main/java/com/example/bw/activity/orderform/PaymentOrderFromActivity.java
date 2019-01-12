@@ -64,6 +64,12 @@ public class PaymentOrderFromActivity extends BaseActivity implements IView {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        iPresenter.onDetach();
+    }
+
+    @Override
     protected void initData() {
 
     }
