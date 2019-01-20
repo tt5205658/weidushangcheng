@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_54"
+    android:gravity="center"
+    >
+    <TextView
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="消费金额"
+        android:id="@+id/playprice"
+        android:textSize="@dimen/sp_14"
+        android:textColor="#666666"
+        />
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="@dimen/dp_0"
+        android:layout_weight="1"
+        android:id="@+id/playtime"
+        android:layout_height="wrap_content"
+        android:text="消费时间"
+        />
+    <ImageView
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:src="@mipmap/success_icon"
+        />
+</LinearLayout>

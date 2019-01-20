@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.bw.R;
+import com.example.bw.bean.orderform.AllBean;
 import com.example.bw.bean.orderform.CollectOrderFromBean;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -20,10 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CollectOrderFromAdapter extends RecyclerView.Adapter<CollectOrderFromAdapter.ViewHodel> {
-
-
-
-    private List<CollectOrderFromBean.OrderListBean> mList;
+    private List<AllBean.OrderListBean> mList;
     private Context mContext;
 
     public CollectOrderFromAdapter(Context mContext) {
@@ -31,7 +29,7 @@ public class CollectOrderFromAdapter extends RecyclerView.Adapter<CollectOrderFr
         mList = new ArrayList<>();
     }
 
-    public void setmList(List<CollectOrderFromBean.OrderListBean> list) {
+    public void setmList(List<AllBean.OrderListBean> list) {
         mList = list;
         notifyDataSetChanged();
     }
@@ -46,7 +44,7 @@ public class CollectOrderFromAdapter extends RecyclerView.Adapter<CollectOrderFr
 
     @Override
     public void onBindViewHolder(@NonNull ViewHodel viewHodel, int i) {
-        List<CollectOrderFromBean.OrderListBean.DetailListBean> detailList = mList.get(i).getDetailList();
+        List<AllBean.OrderListBean.DetailListBean> detailList = mList.get(i).getDetailList();
         double price = 0d;
         int num = 0;
         for (int p = 0; p < detailList.size(); p++) {
@@ -104,7 +102,7 @@ public class CollectOrderFromAdapter extends RecyclerView.Adapter<CollectOrderFr
     OrderFromCallBack orderFromCallBack;
 
     public interface OrderFromCallBack {
-        void deleteOrderFrom(String id);
+
 
         void paymenOrderFrom(String id);
     }

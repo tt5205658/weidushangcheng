@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dp_20"
+    android:layout_marginBottom="@dimen/dp_20"
+    android:background="@drawable/item_myaddress"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dp_10"
+        android:orientation="vertical"
+        >
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订单号"
+                android:textColor="#666666"
+                android:textSize="@dimen/sp_12"
+                android:id="@+id/t1"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订单号"
+                android:textColor="#666666"
+                android:textSize="@dimen/sp_12"
+                android:id="@+id/ordernumber"
+                app:layout_constraintLeft_toRightOf="@id/t1"
+                android:layout_marginLeft="@dimen/dp_10"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+            <ImageView
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_12"
+                android:id="@+id/delete_button"
+                android:src="@mipmap/home_btn_more_purple_n_hdpi"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+        </android.support.constraint.ConstraintLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.jcodecraeer.xrecyclerview.XRecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/orderfrom_data"
+
+                android:layout_height="wrap_content">
+
+            </com.jcodecraeer.xrecyclerview.XRecyclerView>
+        </RelativeLayout>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#666666"
+                android:textSize="@dimen/sp_12"
+                android:id="@+id/orderTime"
+                android:text="2019-01-11"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+        </android.support.constraint.ConstraintLayout>
+
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

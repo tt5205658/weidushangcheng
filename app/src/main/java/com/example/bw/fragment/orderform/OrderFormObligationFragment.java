@@ -12,6 +12,7 @@ import com.example.bw.R;
 import com.example.bw.activity.orderform.PaymentOrderFromActivity;
 import com.example.bw.adapter.orderform.OrderFromObligation;
 import com.example.bw.base.basefragment.BaseFragment;
+import com.example.bw.bean.orderform.AllBean;
 import com.example.bw.bean.orderform.DeleteOrderFromBean;
 import com.example.bw.bean.orderform.ObligationBean;
 import com.example.bw.presenter.IPresenterImpl;
@@ -29,7 +30,7 @@ public class OrderFormObligationFragment extends BaseFragment implements IView {
     Unbinder unbinder;
     private OrderFromObligation orderFromObligation;
     private IPresenterImpl iPresenter;
-
+private int page;
     @Override
     protected int setViewID() {
         return R.layout.orderformobligationfragment;
@@ -43,12 +44,27 @@ public class OrderFormObligationFragment extends BaseFragment implements IView {
     @Override
     protected void initView() {
         iPresenter = new IPresenterImpl(this);
-        iPresenter.startRequest(HttpModel.GET,"order/verify/v1/findOrderListByStatus?status=1&page=1&count=10",null,ObligationBean.class);
+        page=1;
+       initValue();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         obligationXrecycleview.setLayoutManager(layoutManager);
         orderFromObligation = new OrderFromObligation(getActivity());
         obligationXrecycleview.setAdapter(orderFromObligation);
+        obligationXrecycleview.setPullRefreshEnabled(true);
+        obligationXrecycleview.setLoadingMoreEnabled(false);
+        obligationXrecycleview.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                page=1;
+                initValue();
+            }
+
+            @Override
+            public void onLoadMore() {
+                initValue();
+            }
+        });
 
         orderFromObligation.setOrderFromCallBack(new OrderFromObligation.OrderFromCallBack() {
             @Override
@@ -63,11 +79,16 @@ public class OrderFormObligationFragment extends BaseFragment implements IView {
         });
     }
 
-    /*@Override
+    private void initValue() {
+        iPresenter.startRequest(HttpModel.GET,"order/verify/v1/findOrderListByStatus?status=1&page="+page+"&count=10",null,AllBean.class);
+        page++;
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         iPresenter.startRequest(HttpModel.GET,"order/verify/v1/findOrderListByStatus?status=1&page=1&count=10",null,ObligationBean.class);
-    }*/
+    }
 
     @Override
     protected void initData() {
@@ -88,17 +109,19 @@ public class OrderFormObligationFragment extends BaseFragment implements IView {
 
     @Override
     public void getDataSuccess(Object data) {
-        if(data instanceof ObligationBean){
-            ObligationBean data1 = (ObligationBean) data;
+        if(data instanceof AllBean){
+            AllBean data1 = (AllBean) data;
             orderFromObligation.setmList(data1.getOrderList());
         }else if(data instanceof DeleteOrderFromBean){
             DeleteOrderFromBean data1 = (DeleteOrderFromBean) data;
             if(data1.getMessage().equals("删除成功")){
-                Toast.makeText(getActivity(),data1.getMessage(),Toast.LENGTH_SHORT).show();;
-                iPresenter.startRequest(HttpModel.GET,"order/verify/v1/findOrderListByStatus?status=1&page=1&count=10",null,ObligationBean.class);
+                Toast.makeText(getActivity(),data1.getMessage(),Toast.LENGTH_SHORT).show();
+                iPresenter.startRequest(HttpModel.GET,"order/verify/v1/findOrderListByStatus?status=1&page="+page+"&count=10",null,AllBean.class);
 
             }
         }
+        obligationXrecycleview.loadMoreComplete();
+        obligationXrecycleview.refreshComplete();
     }
 
     @Override

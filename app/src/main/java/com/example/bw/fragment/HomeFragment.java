@@ -30,6 +30,7 @@ import com.example.bw.bean.home.HomePopupOneBean;
 import com.example.bw.bean.home.HomePopupTwoBean;
 import com.example.bw.bean.home.HomeShoppingBean;
 import com.example.bw.bean.home.HomeSwitchEventBean;
+import com.example.bw.bean.home.SkitFragment;
 import com.example.bw.fragment.circle.FragmentHomeHomepage;
 import com.example.bw.fragment.circle.FragmentHomeShopping;
 import com.example.bw.presenter.IPresenterImpl;
@@ -37,6 +38,8 @@ import com.example.bw.utils.okhttputils.HttpModel;
 import com.example.bw.view.IView;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,19 +75,33 @@ private boolean tag;
     @Override
     protected void initButterKnife(View view) {
         bind = ButterKnife.bind(this, view);
+
     }
 
     @Override
     protected void initView() {
         tag=true;
+
+
         iPresenter = new IPresenterImpl(this);
         supportFragmentManager = getActivity().getSupportFragmentManager();
         initFragment(tag);
 initimageViewSwitche();
     }
 
+@Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+public void setFragment(SkitFragment fragment){
+
+    //3 通过fragmentmanager获取fragment的事务管理对象
+    fragmentTransaction = supportFragmentManager.beginTransaction();
+    //4获取要显示的fragment
+    FragmentHomeHomepage homepage = new FragmentHomeHomepage();
 
 
+        fragmentTransaction.replace(R.id.fragment_home_fragmentlayout, homepage);
+
+    fragmentTransaction.commit();
+}
     @OnClick(R.id.fragment_home_head_textview_search)
     public void searchClick(){
     String s = editTextSerch.getText().toString();
@@ -146,6 +163,7 @@ initimageViewSwitche();
 
 
     private void initFragment(boolean tag) {
+
         //3 通过fragmentmanager获取fragment的事务管理对象
         fragmentTransaction = supportFragmentManager.beginTransaction();
         //4获取要显示的fragment
@@ -158,6 +176,8 @@ initimageViewSwitche();
         }
         fragmentTransaction.commit();
     }
+
+
 
     @Override
     protected void initData() {

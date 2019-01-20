@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_24"
+    android:layout_marginTop="@dimen/dp_20"
+    android:layout_marginRight="@dimen/dp_24"
+    android:layout_marginBottom="@dimen/dp_20"
+    android:background="@drawable/item_circle"
+    android:translationZ="5dp"
+    android:elevation="10dp"
+    android:padding="@dimen/dp_10"
+    >
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/c1"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_50"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+<ImageView
+    android:layout_width="@dimen/dp_24"
+    android:layout_height="@dimen/dp_24"
+    android:id="@+id/imagedelete"
+    android:src="@mipmap/delete"
+    app:layout_constraintRight_toRightOf="parent"
+    />
+        <ImageView
+            android:id="@+id/item_frgment_circle_imageicon"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:src="@mipmap/bg_homepage_bottom"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_frgment_circle_textname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:text="oooooooooooo"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/item_frgment_circle_imageicon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_frgment_circle_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="riqi"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/item_frgment_circle_textcontent"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/c1" />
+
+    <com.example.bw.view.MultiImageView
+        android:id="@+id/item_frgment_circle_imagecontent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_frgment_circle_textcontent" />
+
+    <TextView
+        android:id="@+id/item_frgment_circle_textnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_25"
+        android:text="420"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_frgment_circle_imagecontent" />
+
+    <ImageView
+        android:id="@+id/item_frgment_circle_imagezan"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_10"
+        android:src="@mipmap/common_btn_prise_n_hdpi"
+        app:layout_constraintRight_toLeftOf="@id/item_frgment_circle_textnum"
+        app:layout_constraintTop_toBottomOf="@id/item_frgment_circle_imagecontent" />
+</android.support.constraint.ConstraintLayout>

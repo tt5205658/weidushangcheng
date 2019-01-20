@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.bw.R;
+import com.example.bw.bean.orderform.AllBean;
 import com.example.bw.bean.orderform.ObligationBean;
 import com.example.bw.view.CustomView;
 
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
 public class OrderFromObligationData extends RecyclerView.Adapter<OrderFromObligationData.ViewHodel> {
 
 
-    private List<ObligationBean.OrderListBean.DetailListBean> mList;
+    private List<AllBean.OrderListBean.DetailListBean> mList;
     private Context mContext;
 
     public OrderFromObligationData(Context mContext) {
@@ -31,7 +32,7 @@ public class OrderFromObligationData extends RecyclerView.Adapter<OrderFromOblig
         mList = new ArrayList<>();
     }
 
-    public void setmList(List<ObligationBean.OrderListBean.DetailListBean> list) {
+    public void setmList(List<AllBean.OrderListBean.DetailListBean> list) {
         this.mList = list;
         notifyDataSetChanged();
     }
@@ -49,7 +50,7 @@ public class OrderFromObligationData extends RecyclerView.Adapter<OrderFromOblig
         String[] split = mList.get(i).getCommodityPic().split("\\,");
         Glide.with(mContext).load(split[0]).into(viewHodel.shoopingImage);
         viewHodel.shoppingTitle.setText(mList.get(i).getCommodityName());
-        viewHodel.shoppingPrice.setText(mList.get(i).getCommodityPrice() + "");
+        viewHodel.shoppingPrice.setText("$"+mList.get(i).getCommodityPrice() + "");
     }
 
     @Override

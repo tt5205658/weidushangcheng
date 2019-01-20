@@ -10,10 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.bw.R;
 import com.example.bw.activity.HomeViewpageActivity;
 import com.example.bw.activity.my.MyAddressActivity;
+import com.example.bw.activity.my.MyCircleActivity;
+import com.example.bw.activity.my.MyFootprintActivity;
 import com.example.bw.activity.my.MyParticularsActivity;
+import com.example.bw.activity.my.MyWallet;
 import com.example.bw.base.basefragment.BaseFragment;
 import com.example.bw.bean.user.UserDataBean;
 import com.example.bw.presenter.IPresenterImpl;
@@ -87,11 +91,13 @@ public class MyFragment extends BaseFragment implements IView {
                 startActivity(new Intent(getActivity(),MyParticularsActivity.class));
                 break;
             case R.id.fragment_my_mycircle:
-
+                startActivity(new Intent(getActivity(),MyCircleActivity.class));
                 break;
             case R.id.fragment_my_myfootprint:
+                startActivity(new Intent(getActivity(),MyFootprintActivity.class));
                 break;
             case R.id.fragment_my_mywallet:
+                startActivity(new Intent(getActivity(),MyWallet.class));
                 break;
             case R.id.fragment_my_myaddress:
                 startActivity(new Intent(getActivity(),MyAddressActivity.class));
@@ -103,7 +109,8 @@ public class MyFragment extends BaseFragment implements IView {
     public void getDataSuccess(Object data) {
         if(data instanceof  UserDataBean){
             UserDataBean data1 = (UserDataBean) data;
-            Glide.with(getActivity()).load(data1.getResult().getHeadPic()).into(fragmentMyMypic);
+            RequestOptions requestOptions = RequestOptions.circleCropTransform();
+            Glide.with(getActivity()).load(data1.getResult().getHeadPic()).apply(requestOptions).into(fragmentMyMypic);
             fragmentMyMyname.setText (data1.getResult().getNickName());
         }
     }

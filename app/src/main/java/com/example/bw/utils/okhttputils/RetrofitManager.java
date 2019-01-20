@@ -33,7 +33,7 @@ import rx.schedulers.Schedulers;
 
 public class RetrofitManager  {
     BaseApi baseApi;
-    private final String BASE_API="http://172.17.8.100/small/";
+    private final String BASE_API="http://mobile.bwstudent.com/small/";
     private static RetrofitManager mRetrofitManager;
     public static synchronized RetrofitManager getInstance(){
         if(mRetrofitManager==null){
@@ -86,6 +86,32 @@ public class RetrofitManager  {
             requestBodyMap.put(key, requestBody);
         }
         return requestBodyMap;
+    }
+
+
+    /**
+     *上传头像
+     * */
+    public static MultipartBody filesMultipar(Map<String,String> map){
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        for(Map.Entry<String,String> entry:map.entrySet()){
+            File file = new File(entry.getValue());
+            builder.addFormDataPart(entry.getKey(),"tp.png",
+                    RequestBody.create(MediaType.parse("multipart/form-data"),file));
+        }
+        builder.setType(MultipartBody.FORM);
+        MultipartBody multipartBody = builder.build();
+        return multipartBody;
+    }
+    public void imagePost(String url, Map<String,String> map,HttpListener listener){
+        if(map == null){
+            map = new HashMap<>();
+        }
+        MultipartBody multipartBody = filesMultipar(map);
+        baseApi.imagePost(url,multipartBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getObserver(listener));
     }
 
     public RetrofitManager get(String url,HttpListener listener1) {
@@ -141,7 +167,7 @@ public RetrofitManager delete(String url,HttpListener listener1){
 
     }
 
-    public void imagePost( String path, HttpListener listener1){
+    /*public void imagePost( String path, HttpListener listener1){
         File file = new File(path);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
@@ -157,7 +183,7 @@ public RetrofitManager delete(String url,HttpListener listener1){
                             String message = t.getMessage();
                         }
                     });
-    }
+    }*/
 
     public void put(String url, Map<String, String> map,HttpListener listener1) {
         if (map == null) {

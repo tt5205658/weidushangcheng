@@ -24,18 +24,18 @@ public class IModelImpl<T> implements IModel {
                 setPost(url, params, clazz, callBack);
                 break;
             case "get":
-                setGet(url,clazz,callBack);
+                setGet(url, clazz, callBack);
                 break;
             case "postFormBody":
                 break;
             case "delete":
-                setDelete(url,clazz,callBack);
+                setDelete(url, clazz, callBack);
                 break;
             case "put":
-                    setPut(url,params,clazz,callBack);
+                setPut(url, params, clazz, callBack);
                 break;
             case "imagePost":
-                setImagePost(url,clazz,callBack);
+                setImagePost(url,params, clazz, callBack);
                 break;
         }
 
@@ -61,18 +61,21 @@ public class IModelImpl<T> implements IModel {
         });
     }
 
-    private void setImagePost(String url,Class aClass,ICallBack iCallBack){
-RetrofitManager.getInstance().imagePost(url, new RetrofitManager.HttpListener() {
-    @Override
-    public void onSuccess(String data) {
-        String data1 = data;
-    }
+    private void setImagePost(String url, Map<String, String> params, final Class clazz, final ICallBack callBack) {
+        RetrofitManager.getInstance().imagePost(url,params, new RetrofitManager.HttpListener() {
+            @Override
+            public void onSuccess(String data) {
+                String data1 = data;
+                Object o = new Gson().fromJson(data1, clazz);
+                callBack.onSuccess(o);
+            }
 
-    @Override
-    public void onFail(String error) {
-        String error1 = error;
-    }
-});
+            @Override
+            public void onFail(String error) {
+                String error1 = error;
+                callBack.onFail(error);
+            }
+        });
 
 
     }
@@ -95,29 +98,31 @@ RetrofitManager.getInstance().imagePost(url, new RetrofitManager.HttpListener() 
             }
         });
     }
-private void setDelete(String url,Class aClass,ICallBack iCallBack){
-       RetrofitManager.getInstance().delete(url, new RetrofitManager.HttpListener() {
-           @Override
-           public void onSuccess(String data) {
-               if(iCallBack!=null){
-                   Object o = new Gson().fromJson(data, aClass);
-                   iCallBack.onSuccess(o);
-               }
-           }
 
-           @Override
-           public void onFail(String error) {
-                if(iCallBack!=null){
+    private void setDelete(String url, Class aClass, ICallBack iCallBack) {
+        RetrofitManager.getInstance().delete(url, new RetrofitManager.HttpListener() {
+            @Override
+            public void onSuccess(String data) {
+                if (iCallBack != null) {
+                    Object o = new Gson().fromJson(data, aClass);
+                    iCallBack.onSuccess(o);
+                }
+            }
+
+            @Override
+            public void onFail(String error) {
+                if (iCallBack != null) {
                     iCallBack.onFail(error);
                 }
-           }
-       }) ;
-}
-    private void setGet(String url,Class aClass,ICallBack callBack){
+            }
+        });
+    }
+
+    private void setGet(String url, Class aClass, ICallBack callBack) {
         RetrofitManager.getInstance().get(url, new RetrofitManager.HttpListener() {
             @Override
             public void onSuccess(String data) {
-                if(callBack!=null){
+                if (callBack != null) {
                     Object o = new Gson().fromJson(data, aClass);
                     callBack.onSuccess(o);
                 }
@@ -125,7 +130,7 @@ private void setDelete(String url,Class aClass,ICallBack iCallBack){
 
             @Override
             public void onFail(String error) {
-                if(callBack!=null){
+                if (callBack != null) {
                     callBack.onFail(error);
                 }
             }

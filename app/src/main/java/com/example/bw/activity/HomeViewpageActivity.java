@@ -2,13 +2,16 @@ package com.example.bw.activity;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.bw.R;
 import com.example.bw.adapter.HomeViewPageAdapter;
 import com.example.bw.base.baseactivity.BaseActivity;
+import com.example.bw.bean.home.SkitFragment;
 import com.example.bw.bean.orderform.SkipFromOrderFrom;
 import com.example.bw.bean.orderform.SkipHome;
 
@@ -44,7 +47,7 @@ public class HomeViewpageActivity extends BaseActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         ButterKnife.bind(this);
-        EventBus.getDefault().register(this);
+    //  EventBus.getDefault().register(this);
         viewPageAdapter = new HomeViewPageAdapter(getSupportFragmentManager());
         activityHomeViewpage.setAdapter(viewPageAdapter);
         activityHomeViewpage.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -107,7 +110,7 @@ public class HomeViewpageActivity extends BaseActivity {
             }
         });
     }
-    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    /*@Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void skip(SkipHome skipHome){
         activityHomeViewpage.setCurrentItem(3);
         EventBus.getDefault().removeAllStickyEvents();
@@ -116,17 +119,33 @@ public class HomeViewpageActivity extends BaseActivity {
     public void skipFromOrder(SkipFromOrderFrom skip){
         if(skip.getType()==1){
             //首页
-   //         activityHomeViewpage.setCurrentItem(0);
+            activityHomeViewpage.setCurrentItem(0);
         }else if(skip.getType()==2){
             //订单
             activityHomeViewpage.setCurrentItem(3);
         }
-    }
+    }*/
 
     @Override
     protected void initData() {
 
     }
 
+    private long exitTime = 0;
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+
+            if((System.currentTimeMillis()-exitTime) > 2000){
+                EventBus.getDefault().postSticky(new SkitFragment(true));
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

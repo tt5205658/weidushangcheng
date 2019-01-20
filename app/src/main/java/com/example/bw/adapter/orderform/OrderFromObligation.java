@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.bw.R;
+import com.example.bw.bean.orderform.AllBean;
 import com.example.bw.bean.orderform.ObligationBean;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
 public class OrderFromObligation extends RecyclerView.Adapter<OrderFromObligation.ViewHodel> {
 
 
-    private List<ObligationBean.OrderListBean> mList;
+    private List<AllBean.OrderListBean> mList;
     private Context mContext;
 
     public OrderFromObligation(Context mContext) {
@@ -31,7 +32,7 @@ public class OrderFromObligation extends RecyclerView.Adapter<OrderFromObligatio
         mList = new ArrayList<>();
     }
 
-    public void setmList(List<ObligationBean.OrderListBean> list) {
+    public void setmList(List<AllBean.OrderListBean> list) {
         mList = list;
         notifyDataSetChanged();
     }
@@ -46,7 +47,7 @@ View view = View.inflate(mContext,R.layout.item_orderfrom_obligation,null);
 
     @Override
     public void onBindViewHolder(@NonNull ViewHodel viewHodel, int i) {
-        List<ObligationBean.OrderListBean.DetailListBean> detailList = mList.get(i).getDetailList();
+        List<AllBean.OrderListBean.DetailListBean> detailList = mList.get(i).getDetailList();
         double price = 0d;
         int num=0;
         for(int p =0;p<detailList.size();p++){

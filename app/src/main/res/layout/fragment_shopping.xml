@@ -20,6 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:id="@+id/c1"
+        android:background="#88eeeeee"
         app:layout_constraintRight_toRightOf="parent"
         >
         <CheckBox
@@ -50,7 +51,7 @@
             android:layout_height="wrap_content"
             android:textColor="#ff0606"
             android:textSize="@dimen/sp_16"
-            android:text="$1360"
+            android:text="$0"
             android:id="@+id/text_price"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

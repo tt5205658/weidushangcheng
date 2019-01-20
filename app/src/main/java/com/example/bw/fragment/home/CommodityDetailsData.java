@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.example.bw.R;
@@ -45,7 +46,18 @@ public class CommodityDetailsData extends BaseFragment {
         commoditydetailsDataWebview.getSettings().setUseWideViewPort(false);
         commoditydetailsDataWebview.getSettings().setLoadWithOverviewMode(true);
       //  commoditydetailsDataWebview.getSettings().setBuiltInZoomControls(true);
+        //支持javascript
+        commoditydetailsDataWebview.getSettings().setJavaScriptEnabled(true);
+        // 设置可以支持缩放
+        commoditydetailsDataWebview.getSettings().setSupportZoom(true);
+        // 设置出现缩放工具
+        commoditydetailsDataWebview.getSettings().setBuiltInZoomControls(true);
+        //扩大比例的缩放
+        commoditydetailsDataWebview.getSettings().setUseWideViewPort(true);
 
+        //自适应屏幕
+        commoditydetailsDataWebview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        commoditydetailsDataWebview.getSettings().setLoadWithOverviewMode(true);
 
         commoditydetailsDataWebview.loadDataWithBaseURL(null, result.getDetails(), "text/html", "utf-8", null);
     }

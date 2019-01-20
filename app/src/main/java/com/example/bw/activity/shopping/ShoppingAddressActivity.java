@@ -160,6 +160,7 @@ private int id;
                 alertDialog.setNegativeButton("回首页", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         finish();
                     }
                 });

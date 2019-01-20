@@ -8,6 +8,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -35,7 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CommodityDetails extends BaseActivity implements IView {
+public class  CommodityDetails extends BaseActivity implements IView {
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.commoditydetails_head_shopping)
@@ -58,6 +59,8 @@ public class CommodityDetails extends BaseActivity implements IView {
     private CommodityDetailsShopping commodityDetailsShopping;
     private FindCommodityDetailsById data1;
     List<SyncShoppingCart>list;
+    private String commodityId;
+
     @Override
     protected int setViewID() {
         return R.layout.commoditydetails;
@@ -69,7 +72,7 @@ public class CommodityDetails extends BaseActivity implements IView {
         iPresenter = new IPresenterImpl(this);
 
         Intent intent = getIntent();
-        String commodityId = intent.getStringExtra("CommodityId");
+        commodityId = intent.getStringExtra("CommodityId");
         iPresenter.startRequest(HttpModel.GET, "commodity/v1/findCommodityDetailsById?commodityId=" + commodityId, null, FindCommodityDetailsById.class);
 
 
@@ -79,7 +82,7 @@ public class CommodityDetails extends BaseActivity implements IView {
     private void initFragment() {
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        commodityDetailsComment = new CommodityDetailsComment();
+        commodityDetailsComment = new CommodityDetailsComment(commodityId);
         fragmentTransaction.add(R.id.commoditydetails_fragment_pinglun, commodityDetailsComment);
         fragmentTransaction.commit();
 
@@ -106,12 +109,12 @@ public class CommodityDetails extends BaseActivity implements IView {
                     commoditydetailsHeadShopping.setTextColor(Color.parseColor("#FF0000"));
                     commoditydetailsHeadData.setTextColor(Color.parseColor("#FFFFFF"));
                     commoditydetailsHeadPinglun.setTextColor(Color.parseColor("#FFFFFF"));
-                } else if (scrollY > 1000 && scrollY < 2500) {
+                } else if (scrollY > 1000 && scrollY < 3500) {
 
                     commoditydetailsHeadShopping.setTextColor(Color.parseColor("#FFFFFF"));
                     commoditydetailsHeadData.setTextColor(Color.parseColor("#FF0000"));
                     commoditydetailsHeadPinglun.setTextColor(Color.parseColor("#FFFFFF"));
-                } else if (scrollY > 2500) {
+                } else if (scrollY > 3500) {
                     commoditydetailsHeadShopping.setTextColor(Color.parseColor("#FFFFFF"));
                     commoditydetailsHeadData.setTextColor(Color.parseColor("#FFFFFF"));
                     commoditydetailsHeadPinglun.setTextColor(Color.parseColor("#FF0000"));
@@ -130,6 +133,7 @@ public class CommodityDetails extends BaseActivity implements IView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
+                onBackPressed();
                 break;
             case R.id.commoditydetails_head_shopping:
                 break;
@@ -155,7 +159,7 @@ public class CommodityDetails extends BaseActivity implements IView {
             data1 = (FindCommodityDetailsById) data;
             commodityDetailsShopping.setFindCommodityDetailsById(data1);
             commodityDetailsData.setFindCommodityDetailsById(data1);
-            commodityDetailsComment.setFindCommodityDetailsById(data1);
+        //    commodityDetailsComment.setFindCommodityDetailsById(data1);*/
         }else
         if(data instanceof QueryShoppingDataBean){
             QueryShoppingDataBean queryBean = (QueryShoppingDataBean) data;

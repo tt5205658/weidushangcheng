@@ -8,8 +8,8 @@
     >
     <ImageButton
         android:id="@+id/jian"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:src="@drawable/jian"
         android:background="@drawable/custom_edit_shape"
         />
@@ -25,8 +25,8 @@
         />
     <ImageButton
         android:id="@+id/add"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:src="@drawable/add"
         android:background="@drawable/custom_edit_shape"
         />

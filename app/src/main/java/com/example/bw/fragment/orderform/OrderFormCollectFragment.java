@@ -7,10 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.bw.R;
 import com.example.bw.adapter.orderform.CollectOrderFromAdapter;
 import com.example.bw.base.basefragment.BaseFragment;
+import com.example.bw.bean.orderform.AllBean;
 import com.example.bw.bean.orderform.CollectOrderFromBean;
 import com.example.bw.bean.orderform.CollectSuccessBean;
 import com.example.bw.bean.orderform.ObligationBean;
@@ -32,7 +34,7 @@ public class OrderFormCollectFragment extends BaseFragment implements IView {
     Unbinder unbinder;
     private IPresenterImpl iPresenter;
     private CollectOrderFromAdapter orderFromAdapter;
-
+private int page;
     @Override
     protected int setViewID() {
         return R.layout.orderformcollectfragment;
@@ -45,6 +47,7 @@ public class OrderFormCollectFragment extends BaseFragment implements IView {
 
     @Override
     protected void initView() {
+        page = 1;
         iPresenter = new IPresenterImpl(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
@@ -52,29 +55,43 @@ public class OrderFormCollectFragment extends BaseFragment implements IView {
         colleobligationXrecycleview.setLayoutManager(layoutManager);
         orderFromAdapter = new CollectOrderFromAdapter(getActivity());
         colleobligationXrecycleview.setAdapter(orderFromAdapter);
-        iPresenter.startRequest(HttpModel.GET,"order/verify/v1/findOrderListByStatus?status=2&page=1&count=10",null,CollectOrderFromBean.class);
-
+        colleobligationXrecycleview.setLoadingMoreEnabled(false);
+initValue();
         orderFromAdapter.setOrderFromCallBack(new CollectOrderFromAdapter.OrderFromCallBack() {
+
+
             @Override
-            public void deleteOrderFrom(String id) {
+            public void paymenOrderFrom(String id) {
                 Map<String,String>map = new HashMap<>();
                 map.put("orderId",id);
                 iPresenter.startRequest(HttpModel.PUT,"order/verify/v1/confirmReceipt",map,CollectSuccessBean.class);
             }
+        });
+        colleobligationXrecycleview.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                page=1;
+                initValue();
+            }
 
             @Override
-            public void paymenOrderFrom(String id) {
-
+            public void onLoadMore() {
+            initValue();
             }
         });
     }
 
-   /* @Override
+    private void initValue() {
+        iPresenter.startRequest(HttpModel.GET,"order/verify/v1/findOrderListByStatus?status=2&page="+page+"&count=10",null,AllBean.class);
+        page++;
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        iPresenter.startRequest(HttpModel.GET,"order/verify/v1/findOrderListByStatus?status=2&page=1&count=10",null,CollectOrderFromBean.class);
+      //  iPresenter.startRequest(HttpModel.GET,"order/verify/v1/findOrderListByStatus?status=2&page="+page+"&count=10",null,CollectOrderFromBean.class);
 
-    }*/
+    }
 
     @Override
     public void onDestroy() {
@@ -97,16 +114,19 @@ public class OrderFormCollectFragment extends BaseFragment implements IView {
 
     @Override
     public void getDataSuccess(Object data) {
-        if(data instanceof CollectOrderFromBean){
-            CollectOrderFromBean data1 = (CollectOrderFromBean) data;
+        if(data instanceof AllBean){
+            AllBean data1 = (AllBean) data;
             orderFromAdapter.setmList(data1.getOrderList());
         }else if(data instanceof CollectSuccessBean){
             CollectSuccessBean data1 = (CollectSuccessBean) data;
             String message = data1.getMessage();
-            if(message.equals("")){
-
+            Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
+            if(message.equals("确认收货成功")){
+                iPresenter.startRequest(HttpModel.GET,"order/verify/v1/findOrderListByStatus?status=2&page="+page+"&count=10",null,AllBean.class);
             }
         }
+        colleobligationXrecycleview.loadMoreComplete();
+        colleobligationXrecycleview.refreshComplete();
     }
 
     @Override

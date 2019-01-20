@@ -4,8 +4,17 @@
     android:layout_height="match_parent"
     android:background="@drawable/item_myaddress"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="6dp"
+        android:background="#88333333"
+        android:layout_marginLeft="@dimen/dp_85"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/t1"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/t1"
         android:layout_height="match_parent">
         <com.jcodecraeer.xrecyclerview.XRecyclerView
             android:layout_width="match_parent"

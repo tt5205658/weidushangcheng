@@ -20,8 +20,11 @@ import com.example.bw.bean.circle.FindCircleListBean;
 import com.example.bw.presenter.IPresenterImpl;
 import com.example.bw.utils.okhttputils.HttpModel;
 import com.example.bw.view.IView;
+import com.example.bw.view.MultiImageView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,24 +45,27 @@ public class FragmentCircleRecycleAdapter extends RecyclerView.Adapter<FragmentC
     public FragmentCircleRecycleAdapter(Context mContext) {
         this.mContext = mContext;
         iPresenter = new IPresenterImpl(this);
-        mList=new ArrayList<>();
+        mList = new ArrayList<>();
     }
-public void setmList(List<FindCircleListBean.ResultBean>list){
+
+    public void setmList(List<FindCircleListBean.ResultBean> list) {
         mList.clear();
-        if(list!=null){
+        if (list != null) {
             mList.addAll(list);
         }
         notifyDataSetChanged();
 
-}
-public void addmList(List<FindCircleListBean.ResultBean>list){
+    }
 
-        if(list!=null){
+    public void addmList(List<FindCircleListBean.ResultBean> list) {
+
+        if (list != null) {
             mList.addAll(list);
             notifyDataSetChanged();
         }
 
-}
+    }
+
     @NonNull
     @Override
     public ViewHodel onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -68,73 +74,63 @@ public void addmList(List<FindCircleListBean.ResultBean>list){
         return new ViewHodel(inflate);
     }
 
+    int p;
+
     @Override
     public void onBindViewHolder(@NonNull ViewHodel viewHodel, int i) {
         List<FindCircleListBean.ResultBean> mList = this.mList;
         viewHodel.itemFrgmentCircleTextcontent.setText(this.mList.get(i).getContent());
         viewHodel.itemFrgmentCircleTextname.setText(this.mList.get(i).getNickName());
-        viewHodel.itemFrgmentCircleTextnum.setText(this.mList.get(i).getGreatNum()+"");
-        viewHodel.itemFrgmentCircleTime.setText(this.mList.get(i).getCreateTime()+"");
-        Glide.with(mContext).load(this.mList.get(i).getImage()).into(viewHodel.itemFrgmentCircleImagecontent);
-       // Glide.with(mContext).load().into(viewHodel.itemFrgmentCircleImagecontent);
+        viewHodel.itemFrgmentCircleTextnum.setText(this.mList.get(i).getGreatNum() + "");
+
+        viewHodel.itemFrgmentCircleTime.setText(stampToDate(mList.get(i).getCreateTime() + ""));
+        /*Glide.with(mContext).load(this.mList.get(i).getImage()).into(viewHodel.itemFrgmentCircleImagecontent);
+        Glide.with(mContext).load(this.mList.get(i).getImage()).into(viewHodel.itemFrgmentCircleImagecontent);*/
+        List<String>imageList = new ArrayList<>();
+        String image = mList.get(i).getImage();
+        if(image!=""){
+            String[] split = image.split("\\,");
+            for(int pos=0;pos<split.length;pos++){
+                imageList.add(split[pos]);
+            }
+            viewHodel.itemFrgmentCircleImagecontent.setList(imageList);
+        }
+        // Glide.with(mContext).load().into(viewHodel.itemFrgmentCircleImagecontent);
         RequestOptions requestOptions = RequestOptions.circleCropTransform();
         Glide.with(mContext).load(this.mList.get(i).getHeadPic()).apply(requestOptions).into(viewHodel.itemFrgmentCircleImageicon);
-
-        if( this.mList.get(i).getWhetherGreat()==2){
+        p = i;
+        if (this.mList.get(i).getWhetherGreat() == 2) {
             Glide.with(mContext).load(R.mipmap.common_btn_prise_n_xhdpi).into(viewHodel.itemFrgmentCircleImagezan);
-        }else{
+        } else {
             Glide.with(mContext).load(R.mipmap.common_btn_prise_s_xxhdpi).into(viewHodel.itemFrgmentCircleImagezan);
         }
 
         viewHodel.itemFrgmentCircleImagezan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(FragmentCircleRecycleAdapter.this.mList.get(i).getWhetherGreat() ==2){
-                    Map<String,String>map = new HashMap<>();
-                    map.put("circleId", FragmentCircleRecycleAdapter.this.mList.get(i).getId()+"");
-                    iPresenter.startRequest(HttpModel.POST,"circle/verify/v1/addCircleGreat",map,AddCircleGreatBean.class);
-                }else{
-                    Map<String,String>map = new HashMap<>();
-                    map.put("circleId", FragmentCircleRecycleAdapter.this.mList.get(i).getId()+"");
-                    iPresenter.startRequest(HttpModel.DELETE,"circle/verify/v1/cancelCircleGreat?circleId="+ FragmentCircleRecycleAdapter.this.mList.get(i).getId(),map,CancelCircleGreatBean.class);
+                if (FragmentCircleRecycleAdapter.this.mList.get(i).getWhetherGreat() == 2) {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("circleId", FragmentCircleRecycleAdapter.this.mList.get(i).getId() + "");
+                    iPresenter.startRequest(HttpModel.POST, "circle/verify/v1/addCircleGreat", map, AddCircleGreatBean.class);
+                    Glide.with(mContext).load(R.mipmap.common_btn_prise_s_xxhdpi).into(viewHodel.itemFrgmentCircleImagezan);
+                    String trim = viewHodel.itemFrgmentCircleTextnum.getText().toString().trim();
+                    int i1 = Integer.parseInt(trim);
+                    viewHodel.itemFrgmentCircleTextnum.setText((i1 + 1) + "");
+                    mList.get(i).setWhetherGreat(1);
+                } else {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("circleId", FragmentCircleRecycleAdapter.this.mList.get(i).getId() + "");
+                    iPresenter.startRequest(HttpModel.DELETE, "circle/verify/v1/cancelCircleGreat?circleId=" + FragmentCircleRecycleAdapter.this.mList.get(i).getId(), map, CancelCircleGreatBean.class);
+                    Glide.with(mContext).load(R.mipmap.common_btn_prise_n_xhdpi).into(viewHodel.itemFrgmentCircleImagezan);
+                    mList.get(i).setWhetherGreat(2);
+                    String trim = viewHodel.itemFrgmentCircleTextnum.getText().toString().trim();
+                    int i1 = Integer.parseInt(trim);
+                    viewHodel.itemFrgmentCircleTextnum.setText((i1 - 1) + "");
+
                 }
             }
         });
-        setCallBackCircleGreat(new CallBackCircleGreat() {
-            @Override
-            public void cancelCircleGreatSuccess() {
-                FragmentCircleRecycleAdapter.this.mList.get(i-1).setWhetherGreat(2);
-                int greatNum = FragmentCircleRecycleAdapter.this.mList.get(i-1).getGreatNum();
-                FragmentCircleRecycleAdapter.this.mList.get(i-1).setGreatNum(greatNum-1);
-           //     Toast.makeText(mContext,"取消chenggong",Toast.LENGTH_SHORT).show();
-                notifyDataSetChanged();
 
-            }
-
-            @Override
-            public void cancelCircleGreatFail() {
-                Toast.makeText(mContext,"quxiao",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void addCircleGreatSuccess() {
-                FragmentCircleRecycleAdapter.this.mList.get(i-1).setWhetherGreat(1);
-
-                int greatNum = FragmentCircleRecycleAdapter.this.mList.get(i-1).getGreatNum();
-                if(greatNum>0){
-                    FragmentCircleRecycleAdapter.this.mList.get(i-1).setGreatNum(greatNum+1);
-                }
-
-              //  Toast.makeText(mContext,"添加chenggong",Toast.LENGTH_SHORT).show();
-                notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void addCircleGreatFail() {
-                Toast.makeText(mContext,"chenggong",Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
@@ -142,10 +138,19 @@ public void addmList(List<FindCircleListBean.ResultBean>list){
         return mList.size();
     }
 
+    public static String stampToDate(String s) {
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long lt = new Long(s);
+        Date date = new Date(lt);
+        res = simpleDateFormat.format(date);
+        return res;
+    }
+
     @Override
     public void getDataSuccess(Object data) {
-        if(data instanceof AddCircleGreatBean){
-            AddCircleGreatBean data1 = (AddCircleGreatBean) data;
+        if (data instanceof AddCircleGreatBean) {
+            /*AddCircleGreatBean data1 = (AddCircleGreatBean) data;
             if(data1.getMessage().equals("点赞成功")){
                 callBackCircleGreat.addCircleGreatSuccess();
             }else{
@@ -157,23 +162,33 @@ public void addmList(List<FindCircleListBean.ResultBean>list){
                 callBackCircleGreat.cancelCircleGreatSuccess();
             }else{
                 callBackCircleGreat.cancelCircleGreatFail();
-            }
+            }*/
+
+        } else if (data instanceof CancelCircleGreatBean) {
+
         }
 
     }
+
     CallBackCircleGreat callBackCircleGreat;
+
     public interface CallBackCircleGreat {
         void cancelCircleGreatSuccess();
+
         void cancelCircleGreatFail();
+
         void addCircleGreatSuccess();
+
         void addCircleGreatFail();
     }
-    public void setCallBackCircleGreat(CallBackCircleGreat back){
-        callBackCircleGreat=back;
+
+    public void setCallBackCircleGreat(CallBackCircleGreat back) {
+        callBackCircleGreat = back;
     }
+
     @Override
     public void getDataFail(String error) {
-        Toast.makeText(mContext,"错误-->"+error,Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext, "错误-->" + error, Toast.LENGTH_LONG).show();
     }
 
     static class ViewHodel extends RecyclerView.ViewHolder {
@@ -186,11 +201,12 @@ public void addmList(List<FindCircleListBean.ResultBean>list){
         @BindView(R.id.item_frgment_circle_textcontent)
         TextView itemFrgmentCircleTextcontent;
         @BindView(R.id.item_frgment_circle_imagecontent)
-        ImageView itemFrgmentCircleImagecontent;
+        MultiImageView itemFrgmentCircleImagecontent;
         @BindView(R.id.item_frgment_circle_textnum)
         TextView itemFrgmentCircleTextnum;
         @BindView(R.id.item_frgment_circle_imagezan)
         ImageView itemFrgmentCircleImagezan;
+
         public ViewHodel(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

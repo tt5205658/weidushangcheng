@@ -65,7 +65,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/fragment_home_fragmenthome_recycle_hotrecommend"
                 android:layout_marginTop="@dimen/dp_10"
-                android:layout_marginLeft="@dimen/dp_24"
+                android:layout_marginLeft="@dimen/dp_14"
+
                 android:background="@drawable/item_circle"
                 >
             </android.support.v7.widget.RecyclerView>
@@ -106,7 +107,7 @@
            </android.support.constraint.ConstraintLayout>
            <com.jcodecraeer.xrecyclerview.XRecyclerView
                android:layout_width="match_parent"
-               android:layout_height="wrap_content"
+               android:layout_height="match_parent"
                android:id="@+id/fragment_home_fragmenthome_recycle_fashion"
                android:layout_marginTop="@dimen/dp_10"
                android:layout_marginLeft="@dimen/dp_24"

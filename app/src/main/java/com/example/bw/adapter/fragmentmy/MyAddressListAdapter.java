@@ -67,9 +67,16 @@ public class MyAddressListAdapter extends RecyclerView.Adapter<MyAddressListAdap
         viewHodel.itemMyaddressUpdata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAddressCallBack.upDataButton(mList.get(i).getId());
+                myAddressCallBack.upDataButton(mList.get(i).getId()+"",
+                        mList.get(i).getRealName(),
+                        mList.get(i).getPhone(),
+                        mList.get(i).getAddress(),
+                        mList.get(i).getZipCode()
+                        );
+
             }
         });
+
     }
 
     @Override
@@ -99,7 +106,7 @@ public class MyAddressListAdapter extends RecyclerView.Adapter<MyAddressListAdap
 
     MyAddressCallBack myAddressCallBack;
     public interface MyAddressCallBack{
-        void upDataButton(int id);
+        void upDataButton(String id,String name,String phone,String address,String code);
         void defauAddress(int id);
     }
     public void setMyAddressCallBack(MyAddressCallBack callBack){
