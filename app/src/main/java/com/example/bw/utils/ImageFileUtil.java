@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 
 public class ImageFileUtil {
     public static void setBitmap(Bitmap bitmap,String path,int quality){
-        String sub = path.substring(0, path.lastIndexOf("/"));
+        String sub = path.substring(0, path.lastIndexOf( "/"));
         File subFile = new File(sub);
         if(!subFile.exists() || !subFile.isDirectory()){
             try {

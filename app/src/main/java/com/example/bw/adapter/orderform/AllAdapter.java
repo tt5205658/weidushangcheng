@@ -42,7 +42,6 @@ public class AllAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public void setmList(List<AllBean.OrderListBean> list) {
-
         mList = list;
         notifyDataSetChanged();
     }
